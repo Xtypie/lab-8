@@ -3,72 +3,54 @@
 #include <string>
 #include <fstream>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
-string to_lower(string s)
-{
-    
-    for (int i = 0; i < s.length(); i++)
-        if ('A' <= s[i] && s[i] <= 'Z')
-            s[i] += 32;
-    return s;
-}
-
-bool no_same_letter(string s)
-{
-    char letter;
-    for (int i = 0; i < s.length(); i++)
-    {
-        letter = s[i];
-        if (!s.find(letter))
-            continue;
-        string consonant = "qwrtpsdfghjklzxcvbnm";
-        for (int j = 0; j < j < s.length(); j++)
-            if (letter == s[j])
-                return false;
-    }
-}
-
-void sort(vector<string> s)
-{
-    for (int i = 0; i < s.size(); i++)
-        {
-            for (int j = 0; j < s.size(); j++)
-                {
-                string s1 = s[i];
-                string s2 = s[j];
-                if (s1.length() > s2.length())
-                {
-                    string tmp = s2;
-                    s1 = s2;
-                    s2 = tmp;
-                }
-                }
-        }
-
-}
-
-
-
 int main()
 {
-
+    // Задание 1
+    vector<string> str;
     ifstream in("input.txt");
+    ofstream out("output.txt");
     while (!in.eof())
     {
         string s1;
-        vector<string> str;
         in >> s1;
-        //getline(in, s);
         str.push_back(s1);
-        sort(str);
-        for (int i = 0; i < str.size(); i++)
-        {
-            cout << str[i] << endl;
-        }
-        
     }
+    // Сортировка вектора по невозрастанию кол-ва символов:
+    stable_sort(str.begin(), str.end(),
+    [](string_view s1, string_view s2)
+    {return s1.size() > s2.size();});
+
+    int N = 0;
+    for (int i = 0; i < str.size(); i++)
+    {
+        if ((mt::no_same_letter(str[i])) && (N <= 2000))
+        {
+            out << str[i] << endl;
+            N += 1;
+        }
+    }
+
+    // Задание 2
+
+    string s3 = "gsc";
+    cout << mt::is_palindrom(s3) << endl;
+    ifstream in2("input.txt");
+    vector<string> str2;
+        while (!in2.eof())
+    {
+        string s4;
+        in2 >> s4;
+        str2.push_back(s4);
+    }
+    for (int i = 0; i < str2.size(); i++)
+    {
+        cout << str2[i] << endl;
+    }
+    
     
     
     // // удаление элемента
