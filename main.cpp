@@ -9,6 +9,7 @@ using namespace std;
 
 int main()
 {
+    setlocale(LC_ALL, "Russian");
     // Задание 1
     vector<string> str;
     ifstream in("input.txt");
@@ -35,10 +36,9 @@ int main()
     }
 
     // Задание 2
-
-    string s3 = "gsc";
-    cout << mt::is_palindrom(s3) << endl;
-    ifstream in2("input.txt");
+    
+    // Заполним вектор словами из текста:
+    ifstream in2("input2.txt");
     vector<string> str2;
         while (!in2.eof())
     {
@@ -46,10 +46,22 @@ int main()
         in2 >> s4;
         str2.push_back(s4);
     }
-    for (int i = 0; i < str2.size(); i++)
+
+    if (mt::palindrom_in_txt(str2))
     {
-        cout << str2[i] << endl;
+        stable_sort(str2.begin(), str2.end(),
+        [](string s1, string s2)
+        {return mt::count_consonants(s1) > mt::count_consonants(s2);}); // Сортировка вектора по убыванию кол-ва согласных букв
     }
+    else
+    {
+        for (int i = 0; i < str2.size(); i++)
+        {
+            mt::erase_vowels(str2[i]);
+        }
+        sort(str2.begin(), str2.end(), greater<>()); //  Сортировка вектора по неалфавитному порядку
+    }
+    mt::print_vec(str2);
     
     
     

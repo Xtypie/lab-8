@@ -50,7 +50,7 @@ namespace mt
         }
     }
 
-    int count_vowels(string s)
+    int count_consonants(string s)
     {
         int count = 0;
         string vowel = "eyuioa";
@@ -60,6 +60,42 @@ namespace mt
             {
                 count += 1;
             }
+        }
+        return count;
+    }
+
+
+    string erase_vowels(string s)
+    {
+        string vowels = "aeiouy";
+        for (int i = 0; i < s.length(); i++)
+        {
+            if (vowels.find(s[i]))
+            {
+                s.erase(s.begin() + i + 1);
+            }
+        }
+        return s;
+    }
+
+    bool palindrom_in_txt(const vector<string>& vec)
+    {
+        for (int i = 0; i < vec.size(); i++)
+        {
+            if (mt::is_palindrom(vec[i]))
+            {
+                return 1;
+                break;
+            }
+        }
+        return 0;
+    }
+
+    void print_vec(const vector<string> vec)
+    {
+        for (int i = 0; i < vec.size(); i++)
+        {
+            cout << vec[i] << endl;
         }
     }
 }
