@@ -33,6 +33,8 @@ int main()
             N += 1;
         }
     }
+    in.close();
+    out.close();
     str.clear();
     // Задание 2
     
@@ -64,25 +66,35 @@ int main()
         [](string s1, string s2)
         {return mt::count_consonants(s1) < mt::count_consonants(s2);}); // Сортировка вектора по убыванию кол-ва согласных букв
     }
-
+    else
+    {
+        for (int i = 0; i < str.size(); i++)
+        {
+            mt::erase_vowels(str[i]);
+        }
+        sort(str.begin(), str.end(), greater<>()); //  Сортировка вектора по неалфавитному порядку
+    }
+    
     for (int i = 0; i < str.size(); i++)
     {
         cout << str[i] << endl;
     }
+    in2.close();
+    str.clear();
 
-    // else
-    // {
-    //     for (int i = 0; i < str.size(); i++)
-    //     {
-    //         mt::erase_vowels(str[i]);
-    //     }
-    //     sort(str.begin(), str.end(), greater<>()); //  Сортировка вектора по неалфавитному порядку
-    // }
+
+    // Задание 3
+    ifstream in3("input3.txt");
+    ofstream out3("output3.txt");
+
+    string word;
+    while (in >> word) {
+        if (mt::count_diff_vowels(word) >= 4) {
+            std::transform(word.begin(), word.end(), word.begin(), ::toupper);
+            out << word << " (" << mt::found_vowels(word) << ") ";
+    }
+
     
-    // for (int i = 0; i < str.size(); i++)
-    // {
-    //     cout << str[i] << endl;
-    // }
     
     
     // // удаление элемента

@@ -4,6 +4,7 @@
 #include <fstream>
 #include <vector>
 #include <algorithm>
+#include <set>
 using namespace std;
 
 
@@ -77,5 +78,37 @@ namespace mt
         }
         return s;
     }
+
+    int count_diff_vowels(string s)
+    {
+        int count = 0;
+        string vowels = "aeouiy";
+
+        for (int i = 0; i < s.length(); i++)
+        {
+            if (vowels.find(s[i]))
+            {
+                count ++;
+                vowels.erase(s[i]);
+            }
+        }
+        return count;
+    }
+    string found_vowels(string s)
+    {
+        string found;
+        string vowels = "aeouiy";
+
+        for (int i = 0; i < s.length(); i++)
+        {
+            if (vowels.find(s[i]))
+            {
+                found += s[i];
+                vowels.erase(s[i]);
+            }
+        }
+        return found;
+    }
+    
 
 }

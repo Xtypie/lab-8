@@ -8,4 +8,6 @@ namespace mt
     bool is_palindrom(string s);
     int count_consonants(string s);
     string erase_vowels(string s);
+    int count_diff_vowels(string s);
+    string found_vowels(string s);
 }
