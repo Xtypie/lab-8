@@ -9,7 +9,6 @@ using namespace std;
 
 int main()
 {
-    setlocale(LC_ALL, "Russian");
     // Задание 1
     vector<string> str;
     ifstream in("input.txt");
@@ -34,35 +33,56 @@ int main()
             N += 1;
         }
     }
-
+    str.clear();
     // Задание 2
     
     // Заполним вектор словами из текста:
     ifstream in2("input2.txt");
-    vector<string> str2;
         while (!in2.eof())
     {
         string s4;
         in2 >> s4;
-        str2.push_back(s4);
+        str.push_back(s4);
+    }
+    for (int i = 0; i < str.size(); i++)
+    {
+        cout << str[i] << endl;
+    }
+    
+    bool palindrom_in_txt = false;
+        for (int i = 0; i < str.size(); i++)
+    {
+        if (mt::is_palindrom(str[i]))
+        {
+            palindrom_in_txt = true;
+            break;
+        }
+    }
+    if (palindrom_in_txt)
+    {
+        stable_sort(str.begin(), str.end(),
+        [](string s1, string s2)
+        {return mt::count_consonants(s1) < mt::count_consonants(s2);}); // Сортировка вектора по убыванию кол-ва согласных букв
     }
 
-    if (mt::palindrom_in_txt(str2))
+    for (int i = 0; i < str.size(); i++)
     {
-        stable_sort(str2.begin(), str2.end(),
-        [](string s1, string s2)
-        {return mt::count_consonants(s1) > mt::count_consonants(s2);}); // Сортировка вектора по убыванию кол-ва согласных букв
+        cout << str[i] << endl;
     }
-    else
-    {
-        for (int i = 0; i < str2.size(); i++)
-        {
-            mt::erase_vowels(str2[i]);
-        }
-        sort(str2.begin(), str2.end(), greater<>()); //  Сортировка вектора по неалфавитному порядку
-    }
-    mt::print_vec(str2);
+
+    // else
+    // {
+    //     for (int i = 0; i < str.size(); i++)
+    //     {
+    //         mt::erase_vowels(str[i]);
+    //     }
+    //     sort(str.begin(), str.end(), greater<>()); //  Сортировка вектора по неалфавитному порядку
+    // }
     
+    // for (int i = 0; i < str.size(); i++)
+    // {
+    //     cout << str[i] << endl;
+    // }
     
     
     // // удаление элемента

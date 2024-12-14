@@ -78,24 +78,4 @@ namespace mt
         return s;
     }
 
-    bool palindrom_in_txt(const vector<string>& vec)
-    {
-        for (int i = 0; i < vec.size(); i++)
-        {
-            if (mt::is_palindrom(vec[i]))
-            {
-                return 1;
-                break;
-            }
-        }
-        return 0;
-    }
-
-    void print_vec(const vector<string> vec)
-    {
-        for (int i = 0; i < vec.size(); i++)
-        {
-            cout << vec[i] << endl;
-        }
-    }
 }
