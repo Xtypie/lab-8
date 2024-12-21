@@ -4,12 +4,14 @@
 #include <fstream>
 #include <vector>
 #include <algorithm>
+#include <Windows.h>
 
 using namespace std;
 
 int main()
 {
-    // Задание 1
+    SetConsoleOutputCP(CP_UTF8);
+       // Задание 1
     vector<string> str;
     ifstream in("input.txt");
     ofstream out("output.txt");
@@ -21,7 +23,7 @@ int main()
     }
     // Сортировка вектора по невозрастанию кол-ва символов:
     stable_sort(str.begin(), str.end(),
-    [](string_view s1, string_view s2)
+    [](string s1, string s2)
     {return s1.size() > s2.size();});
 
     int N = 0;
@@ -87,13 +89,35 @@ int main()
     ifstream in3("input3.txt");
     ofstream out3("output3.txt");
 
-    string word;
-    while (in >> word) {
-        if (mt::count_diff_vowels(word) >= 4) {
-            std::transform(word.begin(), word.end(), word.begin(), ::toupper);
-            out << word << " (" << mt::found_vowels(word) << ") ";
-    }
+    
+    while (!in3.eof())
+    {
+        string w;
+        string s5;
+        getline(in3, s5);
+        s5 += ".";
+        for (int i = 0; i < s5.length(); i++)
+        {
+            if (isalpha(s5[i]))
+            {
+                w += s5[i];
+            }
+            else
+            {
+                if (mt::count_diff_vowels(w) >= 4)
+                {
+                    out << w << "(" << mt::found_vowels(w) << ")";
+                }
+                else
+                {
+                    out << w;
+                }
+                w.clear();
+            }
+        }
+        out << endl;
 
+    }
     
     
     
